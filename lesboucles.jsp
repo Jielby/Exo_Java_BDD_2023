@@ -26,8 +26,6 @@
     </p>
 
 
-public class Main {
-public static void main (String[] args) {
 int Val = 5;
 for (int j=0;j<Val;j++)}
 for (int i=0;i<Val;i++)}
