@@ -31,15 +31,15 @@
 <p>*****</br>*****</br>*****</br>*****</br>*****</p>
 
 public class Main {
-    public static void main (String[] args) {
-        int Val = 5;
-        for (int j=0;j<Val;j++)}
-            for (int i=0;i<Val;i++)}
-                System.out.print("*");
-            }
-            System.out.println("")
-        }
-    }
+public static void main (String[] args) {
+int Val = 5;
+for (int j=0;j<Val;j++)}
+for (int i=0;i<Val;i++)}
+System.out.print("*");
+}
+System.out.println("")
+}
+}
 }
 
 <h2>Exercice 2 : Triangle rectangle gauche</h2>
