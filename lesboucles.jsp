@@ -25,6 +25,10 @@
     <% } %>
     </p>
 
+<h2>Exercice 1 : Le carré d'étoiles</h2>
+<p>Ecrire le code afin de produire un carré d'étoile</p>
+<p>Exemple si l'utilisateur saisie le valeur 5</p>
+<p>*****</br>*****</br>*****</br>*****</br>*****</p>
 
 int Val = 5;
 for (int j=0;j<Val;j++)}
