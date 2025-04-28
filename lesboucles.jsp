@@ -12,7 +12,6 @@
     <input type="submit" value="Afficher">
 </form>
 
-<%-- Récupération de la valeur saisie par l'utilisateur --%>
 <%
     String valeur = request.getParameter("valeur");
 %>
@@ -125,7 +124,6 @@
 </p>
 
 <p>
-<%-- Partie du haut --%>
 <% for (int i = 1; i <= cpt; i++) { %>
     <% for (int j = 0; j < cpt - i; j++) { %>
         &nbsp;
@@ -136,7 +134,6 @@
     <br>
 <% } %>
 
-<%-- Partie du bas --%>
 <% for (int i = cpt; i > 0; i--) { %>
     <% for (int j = 0; j < cpt - i; j++) { %>
         &nbsp;
