@@ -52,6 +52,16 @@ public class Main {
 <p>Exemple si l'utilisateur saisie le valeur 5</p>
 <p>*</br>**</br>***</br>****</br>*****</p>
 
+    <p>
+    <% for (int i = 0; i < cpt; i++) { %>
+        <% for (int j = 0; j < cpt; j++) { %>
+            <%= "*" %>
+        <% } %>
+        <br>
+    <% } %>
+    </p>
+
+
 <pre>
 public class Main {
     public static void main(String[] args) {
