@@ -12,7 +12,6 @@
 %>
 
 <%
-
     String mot = (String) session.getAttribute("mot");
     char[] motCache = (char[]) session.getAttribute("motCache");
     ArrayList<Character> lettres = (ArrayList<Character>) session.getAttribute("lettres");
@@ -24,7 +23,6 @@
         Arrays.fill(motCache, '_');
         lettres = new ArrayList<Character>();
         essais = 6;
-
         session.setAttribute("mot", mot);
         session.setAttribute("motCache", motCache);
         session.setAttribute("lettres", lettres);
@@ -64,6 +62,7 @@
 
 <h1>Jeu du Pendu</h1>
 
+<!-- Affichage du mot -->
 <p>
 <%
     for (char c : motCache) {
@@ -72,6 +71,7 @@
 %>
 </p>
 
+<!-- Affichage des lettres proposées -->
 <p>Lettres proposées : 
 <%
     for (char c : lettres) {
@@ -80,8 +80,71 @@
 %>
 </p>
 
-<p>Essais restants : <%= essais %></p>
+<!-- Dessin du pendu en fonction des essais -->
+<pre>
+<%
+    switch (essais) {
+        case 6:
+            out.println("  ______");
+            out.println("  |    |");
+            out.println("  |");
+            out.println("  |");
+            out.println("  |");
+            out.println(" _|_");
+            break;
+        case 5:
+            out.println("  ______");
+            out.println("  |    |");
+            out.println("  |    O");
+            out.println("  |");
+            out.println("  |");
+            out.println(" _|_");
+            break;
+        case 4:
+            out.println("  ______");
+            out.println("  |    |");
+            out.println("  |    O");
+            out.println("  |    |");
+            out.println("  |");
+            out.println(" _|_");
+            break;
+        case 3:
+            out.println("  ______");
+            out.println("  |    |");
+            out.println("  |    O");
+            out.println("  |   /|");
+            out.println("  |");
+            out.println(" _|_");
+            break;
+        case 2:
+            out.println("  ______");
+            out.println("  |    |");
+            out.println("  |    O");
+            out.println("  |   /|\\");
+            out.println("  |");
+            out.println(" _|_");
+            break;
+        case 1:
+            out.println("  ______");
+            out.println("  |    |");
+            out.println("  |    O");
+            out.println("  |   /|\\");
+            out.println("  |   / ");
+            out.println(" _|_");
+            break;
+        case 0:
+            out.println("  ______");
+            out.println("  |    |");
+            out.println("  |    O");
+            out.println("  |   /|\\");
+            out.println("  |   / \\");
+            out.println(" _|_");
+            break;
+    }
+%>
+</pre>
 
+<!-- Affichage du formulaire ou du résultat -->
 <%
     if (essais > 0 && !gagne) {
 %>
