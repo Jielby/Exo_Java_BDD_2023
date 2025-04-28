@@ -12,7 +12,6 @@
 %>
 
 <%
-    HttpSession session = request.getSession();
 
     String mot = (String) session.getAttribute("mot");
     char[] motCache = (char[]) session.getAttribute("motCache");
