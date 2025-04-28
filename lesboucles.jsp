@@ -57,7 +57,8 @@ public class Main {
 
 
 <pre>
-
+public class Main {
+    public static void main(String[] args) {
         <% int Val = 5; %>
         <% for (int j = 0; j < Val; j++) { %>
             <% for (int i = 0; i <= j; i++) { %>
@@ -70,6 +71,7 @@ public class Main {
 </pre>
 
     <p>
+    <% int Val = 5; %>
     <% for (int i = 0; i < cpt; i++) { %>
         <% for (int j = 0; j < cpt; j++) { %>
             <%= "*" %>
