@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ASCII Art - Lettres et Chiffres</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <style>
         pre {
             font-family: monospace;
