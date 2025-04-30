@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>ASCII Art</title>
+    <title>ASCII Art - Lettres et Chiffres</title>
     <style>
         pre {
             font-family: monospace;
@@ -12,10 +12,10 @@
     </style>
 </head>
 <body>
-    <h1>ASCII ART</h1>
+    <h1>ASCII ART (A–Z et 0–9)</h1>
 
     <form method="post">
-        Entrez un mot : <input type="text" name="text" />
+        Entrez un mot ou nombre : <input type="text" name="text" />
         <input type="submit" value="Afficher" />
     </form>
 
@@ -49,6 +49,21 @@
             } else {
                 index = -1; // caractère inconnu
             }
+
+            for (int i = 0; i < H; i++) {
+                if (index >= 0) {
+                    int start = index * L;
+                    int end = start + L;
+                    if (end <= rows[i].length()) {
+                        asciiLines[i].append(rows[i].substring(start, end));
+                    } else {
+                        asciiLines[i].append("????");
+                    }
+                } else {
+                    asciiLines[i].append("????");
+                }
+            }
+        }
 
         out.println("<pre>");
         for (int i = 0; i < H; i++) {
