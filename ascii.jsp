@@ -1,62 +1,61 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASCII Art Generator</title>
+    <title>ASCII Art</title>
 </head>
 <body>
-    <h2>ASCII Art Generator</h2>
+    <h1>ASCII ART</h1>
+
     <form method="post">
-        <label for="inputText">Enter Text:</label>
-        <input type="text" id="inputText" name="inputText" required>
-        <input type="submit" value="Generate">
+        Entrez un mot : <input type="text" name="text" />
+        <input type="submit" value="Afficher" />
     </form>
 
-    <%
-        // ASCII art rows for A-Z and ?
-        String[] rows = new String[5];
-        rows[0] = " #  ##   ##  # # ### ###  ##  ### ###  ##  ### ### # # ### ### ### # # ### ### ### ###  ##  ###  #   #   ###  ??? ";
-        rows[1] = "# # # # #   # # #   #   #    #   #  #  # #   #   # # # #   #     # # # #     #   #   # # #   # # # #   #   ??? ";
-        rows[2] = "### ##  #   ### ### ###  #   ### ###  ##  ### ### ### ### ###   #  ### ###   #   ### ### #   # ###  #   #   ??? ";
-        rows[3] = "# # # # #   # #   #   #   #  #     #  # #   #   #   #   # # #  #   # #   #   #     # # # #   #   #  #   #   ??? ";
-        rows[4] = "# # ##   ## # # ### ###  ##  ### ### # #  ### ###   # ### # # ### ### ###   #   ### # # #   # ### ### ###  ??? ";
+<%
+    int L = 4;
+    int H = 5;
 
-        String inputText = request.getParameter("inputText");
+    String input = request.getParameter("text");
+    if (input != null && !input.isEmpty()) {
+        input = input.toUpperCase();
 
-        if (inputText != null && !inputText.isEmpty()) {
-            inputText = inputText.toUpperCase();  // Convert text to uppercase
-            int L = 4;  // Width of a letter
-            int H = 5;  // Height of a letter
+        String[] rows = new String[H];
+        rows[0] = " #  ##   ##  # # ### ###  ##  ### ###  ##  ### ### "; // A à G
+        rows[1] = "# # # # #   # # #   #   #    #   #  #  # #   #   # "; // A à G
+        rows[2] = "### ##  #   ### ### ###  #   ### ###  ##  ### ### "; // A à G
+        rows[3] = "# # # # #   # #   #   #   #  #     #  # #   #   # "; // A à G
+        rows[4] = "# # ##   ## # # ### ###  ##  ### ### # #  ### ### "; // A à G
 
-            // Generate ASCII art
-            for (int i = 0; i < H; i++) {
-                StringBuilder line = new StringBuilder();
+        for (int i = 0; i < H; i++) {
+            StringBuilder line = new StringBuilder();
 
-                // For each character in the input text
-                for (int j = 0; j < inputText.length(); j++) {
-                    char c = inputText.charAt(j);
-                    int index;
+            for (int j = 0; j < input.length(); j++) {
+                char c = input.charAt(j);
+                int index;
 
-                    // If character is between A and Z
-                    if (c >= 'A' && c <= 'Z') {
-                        index = c - 'A'; // Find the index of the letter
-                    } else {
-                        index = 26; // If it's not a letter, use '?' (index 26)
-                    }
-
-                    // Each letter has a width L, so we extract L characters
-                    int start = index * L;
-                    int end = start + L;
-                    line.append(rows[i].substring(start, end));
+                if (c >= 'A' && c <= 'Z') {
+                    index = c - 'A';
+                } else {
+                    index = 26; // position du "?" si caractère inconnu
                 }
 
-                // Output the generated ASCII art line
-                out.println("<pre>" + line.toString() + "</pre>");
+                int start = index * L;
+                int end = start + L;
+
+                // Sécurité : ne pas dépasser la taille de la ligne
+                if (end <= rows[i].length()) {
+                    line.append(rows[i].substring(start, end));
+                } else {
+                    line.append("????"); // caractère inconnu ou hors limites
+                }
             }
+
+            out.println(line.toString() + "<br>");
         }
-    %>
+    }
+%>
+
 </body>
 </html>
