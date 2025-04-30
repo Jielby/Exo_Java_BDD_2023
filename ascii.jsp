@@ -22,11 +22,11 @@
         input = input.toUpperCase();
 
         String[] rows = new String[H];
-        rows[0] = " #  ##   ##  # # ### ###  ##  ### ###  ##  ### ### "; // A à G
-        rows[1] = "# # # # #   # # #   #   #    #   #  #  # #   #   # "; // A à G
-        rows[2] = "### ##  #   ### ### ###  #   ### ###  ##  ### ### "; // A à G
-        rows[3] = "# # # # #   # #   #   #   #  #     #  # #   #   # "; // A à G
-        rows[4] = "# # ##   ## # # ### ###  ##  ### ### # #  ### ### "; // A à G
+        rows[0] = " #  ##   ##  # # ### ###  ##  ### ###  ##  ### ###  # # ### ### # # ### ### ### ###  ##  ### ###  ##  ### "; // A-Z + ?
+        rows[1] = "# # # # #   # # #   #   #    #   #  #  # #   #   #  # # #    #  # # #   #     # # # #  #    #   #  #    #  ";
+        rows[2] = "### ##  #   ### ### ###  #   ### ###  ##  ### ###  ### ###  #  ### ### ###   # ### ###  #   ##  ###  #   ## ";
+        rows[3] = "# # # # #   # #   #   #   #  #     #  # #   #   #  # # #    #  # #   # #     # # #   #  #  #      #  #     #";
+        rows[4] = "# # ##   ## # # ### ###  ##  ### ### # #  ### ### # # ###  #  # # ### ###   # # #   #  ## ### ###  ##  ##  ";
 
         for (int i = 0; i < H; i++) {
             StringBuilder line = new StringBuilder();
@@ -38,17 +38,16 @@
                 if (c >= 'A' && c <= 'Z') {
                     index = c - 'A';
                 } else {
-                    index = 26; // position du "?" si caractère inconnu
+                    index = 26; // le "?"
                 }
 
                 int start = index * L;
                 int end = start + L;
 
-                // Sécurité : ne pas dépasser la taille de la ligne
                 if (end <= rows[i].length()) {
                     line.append(rows[i].substring(start, end));
                 } else {
-                    line.append("????"); // caractère inconnu ou hors limites
+                    line.append("????");
                 }
             }
 
