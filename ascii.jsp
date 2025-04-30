@@ -41,18 +41,14 @@
 
         for (int j = 0; j < input.length(); j++) {
             char c = input.charAt(j);
-            int index = (c >= 'A' && c <= 'Z') ? c - 'A' : 26;
-
-            for (int i = 0; i < H; i++) {
-                int start = index * L;
-                int end = start + L;
-                if (end <= rows[i].length()) {
-                    asciiLines[i].append(rows[i], start, end);
-                } else {
-                    asciiLines[i].append("????");
-                }
+            int index;
+            if (c >= 'A' && c <= 'Z') {
+                index = c - 'A'; // 0–25
+            } else if (c >= '0' && c <= '9') {
+                index = 26 + (c - '0'); // 26–35
+            } else {
+                index = -1; // caractère inconnu
             }
-        }
 
         out.println("<pre>");
         for (int i = 0; i < H; i++) {
