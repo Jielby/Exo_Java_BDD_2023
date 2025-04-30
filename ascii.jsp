@@ -1,61 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>ASCII Art</title>
-</head>
-<body>
-    <h1>ASCII ART</h1>
+import java.util.*;
+import java.io.*;
 
-    <form method="post">
-        Entrez un mot : <input type="text" name="text" />
-        <input type="submit" value="Afficher" />
-    </form>
+class Solution {
 
-<%
-    int L = 4;
-    int H = 5;
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        int L = in.nextInt(); // Largeur d'une lettre
+        int H = in.nextInt(); // Hauteur d'une lettre
+        if (in.hasNextLine()) {
+            in.nextLine(); // Passe à la ligne suivante
+        }
 
-    String input = request.getParameter("text");
-    if (input != null && !input.isEmpty()) {
-        input = input.toUpperCase();
+        String T = in.nextLine().toUpperCase(); // Texte à afficher (en majuscule)
 
+        // On lit les H lignes du style ASCII
         String[] rows = new String[H];
-        rows[0] = " #  ##   ##  # # ### ###  ##  ### ###  ##  ### ### "; // A à G
-        rows[1] = "# # # # #   # # #   #   #    #   #  #  # #   #   # "; // A à G
-        rows[2] = "### ##  #   ### ### ###  #   ### ###  ##  ### ### "; // A à G
-        rows[3] = "# # # # #   # #   #   #   #  #     #  # #   #   # "; // A à G
-        rows[4] = "# # ##   ## # # ### ###  ##  ### ### # #  ### ### "; // A à G
+        for (int i = 0; i < H; i++) {
+            rows[i] = in.nextLine();
+        }
 
+        // Pour chaque ligne de la hauteur
         for (int i = 0; i < H; i++) {
             StringBuilder line = new StringBuilder();
 
-            for (int j = 0; j < input.length(); j++) {
-                char c = input.charAt(j);
+            // Pour chaque lettre du texte T
+            for (int j = 0; j < T.length(); j++) {
+                char c = T.charAt(j);
                 int index;
 
+                // Si c'est une lettre entre A et Z
                 if (c >= 'A' && c <= 'Z') {
                     index = c - 'A';
                 } else {
-                    index = 26; // position du "?" si caractère inconnu
+                    index = 26; // Sinon on prend l'index du caractère "?"
                 }
 
+                // Chaque lettre a une largeur L, on extrait donc L caractères
                 int start = index * L;
                 int end = start + L;
-
-                // Sécurité : ne pas dépasser la taille de la ligne
-                if (end <= rows[i].length()) {
-                    line.append(rows[i].substring(start, end));
-                } else {
-                    line.append("????"); // caractère inconnu ou hors limites
-                }
+                line.append(rows[i].substring(start, end));
             }
 
-            out.println(line.toString() + "<br>");
+            // On affiche la ligne construite
+            System.out.println(line.toString());
         }
     }
-%>
-
-</body>
-</html>
+}
