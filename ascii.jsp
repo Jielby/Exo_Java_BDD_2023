@@ -4,6 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>ASCII Art</title>
+    <style>
+        pre {
+            font-family: monospace;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
     <h1>ASCII ART</h1>
@@ -22,37 +28,37 @@
         input = input.toUpperCase();
 
         String[] rows = new String[H];
-        rows[0] = " #  ##   ##  # # ### ###  ##  ### ###  ##  ### ###  # # ### ### # # ### ### ### ###  ##  ### ###  ##  ### "; // A-Z + ?
+        rows[0] = " #  ##   ##  # # ### ###  ##  ### ###  ##  ### ###  # # ### ### # # ### ### ### ###  ##  ### ###  ##  ### ";
         rows[1] = "# # # # #   # # #   #   #    #   #  #  # #   #   #  # # #    #  # # #   #     # # # #  #    #   #  #    #  ";
         rows[2] = "### ##  #   ### ### ###  #   ### ###  ##  ### ###  ### ###  #  ### ### ###   # ### ###  #   ##  ###  #   ## ";
         rows[3] = "# # # # #   # #   #   #   #  #     #  # #   #   #  # # #    #  # #   # #     # # #   #  #  #      #  #     #";
         rows[4] = "# # ##   ## # # ### ###  ##  ### ### # #  ### ### # # ###  #  # # ### ###   # # #   #  ## ### ###  ##  ##  ";
 
+        StringBuilder[] asciiLines = new StringBuilder[H];
         for (int i = 0; i < H; i++) {
-            StringBuilder line = new StringBuilder();
+            asciiLines[i] = new StringBuilder();
+        }
 
-            for (int j = 0; j < input.length(); j++) {
-                char c = input.charAt(j);
-                int index;
+        for (int j = 0; j < input.length(); j++) {
+            char c = input.charAt(j);
+            int index = (c >= 'A' && c <= 'Z') ? c - 'A' : 26;
 
-                if (c >= 'A' && c <= 'Z') {
-                    index = c - 'A';
-                } else {
-                    index = 26; // le "?"
-                }
-
+            for (int i = 0; i < H; i++) {
                 int start = index * L;
                 int end = start + L;
-
                 if (end <= rows[i].length()) {
-                    line.append(rows[i].substring(start, end));
+                    asciiLines[i].append(rows[i], start, end);
                 } else {
-                    line.append("????");
+                    asciiLines[i].append("????");
                 }
             }
-
-            out.println(line.toString() + "<br>");
         }
+
+        out.println("<pre>");
+        for (int i = 0; i < H; i++) {
+            out.println(asciiLines[i].toString());
+        }
+        out.println("</pre>");
     }
 %>
 
